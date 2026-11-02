@@ -160,24 +160,6 @@ Tests validate signed Better Auth sessions stored in real local D1, not a produc
 
 The read-only demo is a stored snapshot. Its time filters are relative to that snapshot, and its fixture records are excluded from real-data retention cleanup. Real accounts always use current time and measured data. Rerun the local/remote seed when you deliberately want a newer demo snapshot.
 
-## Free-tier operating envelope
-
-There is no paid platform dependency, Redis, background server, Docker runtime, or mandatory custom domain. The default active capacity is **10 deployment-wide / 5 workspace-wide**, lower than the original suggested 25 because two jobs per minute can service ten five-minute monitors before scheduling overhead. This is a throughput bound, **not a quota or timing guarantee**.
-
-Default traffic is at most 2,880 measurements/day plus 1,440 Cron invocations/day. Each probe uses two DNS fetches and one endpoint fetch. API requests and D1 writes, indexes, triggers, retention, authentication, and delivery add cost. Dashboard queries refresh every 60 seconds. Raw data lasts 7 days, hourly aggregates 30 days, daily aggregates 90 days. Cleanup is bounded and eventual; catch-up can take several invocations.
-
-As checked on November 2, 2026, Workers Free documents 100,000 requests/day, 10 ms CPU per HTTP/Cron invocation, 50 subrequests, and six simultaneous outgoing connections. D1 Free documents 5 million rows read/day, 100,000 rows written/day, 500 MB per database, and 5 GB account storage. **Live CPU and billable D1 usage have not been measured.** Monitor real account metrics and reduce `CHECK_BATCH_SIZE`/capacity if needed. The API returns capacity errors rather than admitting excess active monitors. Free-plan quota exhaustion can stop service until reset; no application can promise operation after platform hard limits are reached. [Workers limits](https://developers.cloudflare.com/workers/platform/limits/), [D1 pricing](https://developers.cloudflare.com/d1/platform/pricing/), [D1 limits](https://developers.cloudflare.com/d1/platform/limits/).
-
 ## Deployment, security, and resume
 
 Follow [DEPLOYMENT.md](DEPLOYMENT.md) to deploy to your own **free** Cloudflare account and workers.dev hostname. Remote migrations and deployment are explicit commands and never occur in local startup or CI. Review [SECURITY.md](SECURITY.md), [API contracts](docs/API.md), and [RESUME.md](RESUME.md).
-
-### Tradeoffs and future work
-
-The database is the durable coordination layer; SQL triggers provide atomicity without an always-on queue. Small cron batches and minute-level delivery favor predictable resource bounds over high-frequency monitoring. Discord has no request idempotency key, so a crash after provider acceptance but before recording delivery can duplicate a message; outbox deduplication prevents duplicate event enqueueing, not exactly-once external delivery. Invitation delivery is explicit link sharing rather than mandatory transactional email. Public status pages intentionally exclude internal incident descriptions/events to avoid accidental disclosure.
-
-Potential extensions: operator domain verification, region-specific probes, maintenance windows, supported provider idempotency, configurable public incident updates, CSV exports, and measured production capacity tuning. None of these is presented as implemented.
-
-## License
-
-[MIT](LICENSE). Local font distribution includes the upstream Inter license in `node_modules/@fontsource/inter/LICENSE`.
