@@ -1,0 +1,10 @@
+APP_URL=http://localhost:5173
+BETTER_AUTH_SECRET=replace-with-at-least-32-random-characters
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+# 32 random bytes encoded as base64. Required only for Discord/email channels.
+CHANNEL_ENCRYPTION_KEY=
+RESEND_API_KEY=
+RESEND_FROM=
+# Exact hostnames only, approved by deployment operator. No wildcards.
+APPROVED_MONITOR_HOSTS=example.com

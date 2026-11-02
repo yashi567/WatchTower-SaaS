@@ -1,0 +1,92 @@
+{
+  "measuredAt": "2026-11-02T13:26:50.831Z",
+  "runtime": "Local Miniflare/workerd D1",
+  "note": "Local D1 operation metadata and wall time only. Not Cloudflare billable CPU or production capacity certification. No outbound requests in this measurement.",
+  "samples": [
+    {
+      "scenario": "failed check",
+      "wallClockMs": 14.21,
+      "served_by": "miniflare.db",
+      "served_by_primary": true,
+      "total_attempts": 1,
+      "timings": {
+        "sql_duration_ms": 1
+      },
+      "duration": 1,
+      "changes": 4,
+      "last_row_id": 1,
+      "changed_db": true,
+      "size_after": 348160,
+      "rows_read": 6,
+      "rows_written": 14
+    },
+    {
+      "scenario": "failed check",
+      "wallClockMs": 16.42,
+      "served_by": "miniflare.db",
+      "served_by_primary": true,
+      "total_attempts": 1,
+      "timings": {
+        "sql_duration_ms": 0
+      },
+      "duration": 0,
+      "changes": 4,
+      "last_row_id": 2,
+      "changed_db": true,
+      "size_after": 348160,
+      "rows_read": 8,
+      "rows_written": 10
+    },
+    {
+      "scenario": "failure threshold / incident",
+      "wallClockMs": 16.54,
+      "served_by": "miniflare.db",
+      "served_by_primary": true,
+      "total_attempts": 1,
+      "timings": {
+        "sql_duration_ms": 1
+      },
+      "duration": 1,
+      "changes": 7,
+      "last_row_id": 3,
+      "changed_db": true,
+      "size_after": 348160,
+      "rows_read": 15,
+      "rows_written": 22
+    },
+    {
+      "scenario": "successful check",
+      "wallClockMs": 15.49,
+      "served_by": "miniflare.db",
+      "served_by_primary": true,
+      "total_attempts": 1,
+      "timings": {
+        "sql_duration_ms": 0
+      },
+      "duration": 0,
+      "changes": 4,
+      "last_row_id": 4,
+      "changed_db": true,
+      "size_after": 348160,
+      "rows_read": 13,
+      "rows_written": 10
+    },
+    {
+      "scenario": "recovery threshold / resolution",
+      "wallClockMs": 15.01,
+      "served_by": "miniflare.db",
+      "served_by_primary": true,
+      "total_attempts": 1,
+      "timings": {
+        "sql_duration_ms": 1
+      },
+      "duration": 1,
+      "changes": 7,
+      "last_row_id": 5,
+      "changed_db": true,
+      "size_after": 348160,
+      "rows_read": 14,
+      "rows_written": 19
+    }
+  ]
+}
